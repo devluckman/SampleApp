@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MerriWeather.Bold" parent="">
+        <item name="android:fontFamily">@font/merriweather_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MerriWeather.Regular" parent="">
+        <item name="android:fontFamily">@font/merriweather_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Gabarito.Bold" parent="">
+        <item name="android:fontFamily">@font/gabarito_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Gabarito.Regular" parent="">
+        <item name="android:fontFamily">@font/gabarito_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Gabarito.SemiBold" parent="">
+        <item name="android:fontFamily">@font/gabarito_semibold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="Widget.App.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeColor">@color/dusty_gray</item>
+        <item name="boxStrokeErrorColor">@color/error_red</item>
+
+    </style>
+
+
+</resources>

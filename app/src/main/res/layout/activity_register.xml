@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".ui.register.RegisterActivity">
+
+
+    <TextView
+        style="@style/MerriWeather.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="64dp"
+        android:text="Register"
+        android:textSize="24sp" />
+
+    <!--  TODO(2) Concept Weight like phone number  -->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <com.edu.filmku.widget.CustomEditText
+            android:id="@+id/edt_first_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:hint_text="Jhon"
+            app:input_type="text"
+            app:title="First Name" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="8dp" />
+
+        <com.edu.filmku.widget.CustomEditText
+            android:id="@+id/edt_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:hint_text="Doe"
+            app:input_type="text"
+            app:title="Last Name" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.edu.filmku.widget.CustomEditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:hint_text="Enter your email"
+        app:input_type="email"
+        app:title="Email" />
+
+    <com.edu.filmku.widget.CustomEditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:hint_text="Enter your password"
+        app:input_type="password"
+        app:title="Password" />
+
+    <TextView
+        style="@style/Gabarito.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="must contain 8 char."
+        android:textColor="@color/neutral_n500"
+        android:textSize="14sp" />
+
+    <com.edu.filmku.widget.CustomEditText
+        android:id="@+id/edt_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:hint_text="Enter your password"
+        app:input_type="password"
+        app:title="Confirm Password" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_register"
+        style="@style/Gabarito.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/protage"
+        android:text="Create Account"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_tnc"
+        style="@style/Gabarito.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="By continuing, you agree to our Terms of Service and Privacy Policy."
+        android:textColor="@color/neutral_n500"
+        android:textSize="14sp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".ui.login.LoginActivity">
+
+
+    <TextView
+        style="@style/MerriWeather.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="64dp"
+        android:text="Login"
+        android:textSize="24sp" />
+
+<!--  TODO (1) Create Text input layout then create custom View  -->
+
+    <com.edu.filmku.widget.CustomEditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_text="Enter your email"
+        app:input_type="email"
+        app:title="Email" />
+
+    <com.edu.filmku.widget.CustomEditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:hint_text="Enter your password"
+        app:input_type="password"
+        app:title="Password" />
+
+
+    <TextView
+        style="@style/Gabarito.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="8dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/accent_blue"
+        android:textSize="14sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/Gabarito.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/protage"
+        android:text="Login"
+        android:textColor="@color/white" />
+
+
+    <TextView
+        style="@style/Gabarito.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="or login with"
+        android:textColor="@color/neutral_n500"
+        android:textSize="14sp" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btn_login_google"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_white_stroke_grey"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_login_google" />
+
+        <TextView
+            style="@style/Gabarito.SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="Continue with Google"
+            android:textColor="@color/neutral_n800"
+            android:textSize="14sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_register"
+        style="@style/Gabarito.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/white"
+        android:text="Create an Account"
+        android:textColor="@color/protage"
+        app:strokeColor="@color/protage"
+        app:strokeWidth="1dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
