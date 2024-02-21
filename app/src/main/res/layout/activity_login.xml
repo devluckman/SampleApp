@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_white_stroke_grey"
+        android:background="@drawable/bg_white_stroke_grey_32_dp"
         android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatImageView

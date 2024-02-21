@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_poster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/sample_poster" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_movie_name"
+        style="@style/Gabarito.SemiBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/guideline_mid"
+        app:layout_constraintStart_toEndOf="@id/cv_poster"
+        app:layout_constraintTop_toTopOf="@id/cv_poster"
+        tools:text="Spiderman: No Way Home" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        style="@style/Gabarito.Regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:textColor="@color/dusty_gray"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_star_rating"
+        app:layout_constraintEnd_toEndOf="@id/tv_movie_name"
+        app:layout_constraintStart_toStartOf="@id/tv_movie_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_name"
+        tools:text="9.1/10 IMDb" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:id="@+id/rv_genre"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_rating"
+        app:layout_constraintTop_toBottomOf="@id/tv_rating"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_genre_movie" />
+
+    <TextView
+        style="@style/Gabarito.Regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_time"
+        app:layout_constraintEnd_toEndOf="@id/rv_genre"
+        app:layout_constraintStart_toStartOf="@id/rv_genre"
+        app:layout_constraintTop_toBottomOf="@id/rv_genre"
+        tools:text="1h 47m" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
