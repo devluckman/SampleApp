@@ -29,7 +29,22 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private val _popularData = MutableLiveData<List<ItemMovieModel>>()
+    val popularData = _popularData
+    private fun getPopular() {
+        viewModelScope.launch {
+            repository.getPopularMovie().collect {
+                _popularData.value = it
+            }
+        }
+    }
+
+    fun logout() {
+        repository.logout()
+    }
+
     init {
         getNowPlaying()
+        getPopular()
     }
 }

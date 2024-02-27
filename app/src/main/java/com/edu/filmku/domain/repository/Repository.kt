@@ -23,4 +23,5 @@ interface Repository {
     fun logout()
 
     fun getNowPlayingMovie() : Flow<List<ItemMovieModel>>
+    fun getPopularMovie() : Flow<List<ItemMovieModel>>
 }

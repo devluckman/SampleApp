@@ -4,24 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.edu.filmku.databinding.ItemMovieHorizontalBinding
+import com.edu.filmku.databinding.ItemMovieVerticalBinding
 import com.edu.filmku.domain.model.ItemMovieModel
-import com.edu.filmku.domain.model.MovieDetailModel
 
 /**
  *
- * Created by Lukmanul Hakim on  26/02/24
+ * Created by Lukmanul Hakim on  27/02/24
  * devs.lukman@gmail.com
  */
-class ShowingAdapter : RecyclerView.Adapter<ShowingAdapter.ViewHolder>() {
+class PopularAdapter : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     private val dataList = mutableListOf<ItemMovieModel>()
 
-    class ViewHolder(private val binding: ItemMovieHorizontalBinding) :
+    class ViewHolder(private val binding: ItemMovieVerticalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ItemMovieModel) {
             binding.apply {
-                tvImbd.text = data.rating
+                tvRating.text = data.rating
                 tvMovieName.text = data.title
                 Glide.with(ivPoster)
                     .load(data.poster)
@@ -31,7 +30,7 @@ class ShowingAdapter : RecyclerView.Adapter<ShowingAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemMovieHorizontalBinding.inflate(
+        val binding = ItemMovieVerticalBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)

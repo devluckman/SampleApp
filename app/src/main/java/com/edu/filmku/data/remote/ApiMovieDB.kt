@@ -1,6 +1,7 @@
 package com.edu.filmku.data.remote
 
 import com.edu.filmku.data.response.NowPlayingResponse
+import com.edu.filmku.data.response.PopularResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 
@@ -15,6 +16,11 @@ interface ApiMovieDB {
     suspend fun getNowPlaying(
         @Header("Authorization") token: String
     ): NowPlayingResponse
+
+    @GET("3/movie/popular")
+    suspend fun getPopular(
+        @Header("Authorization") token: String
+    ): PopularResponse
 
 
 

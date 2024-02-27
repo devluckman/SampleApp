@@ -23,6 +23,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL_API", "\"${properties['baseUrl']}\"")
         buildConfigField("String", "BASE_URL_IMAGE", "\"${properties['imgUrl']}\"")
+        buildConfigField("String", "AUTH_TOKEN_API", "\"${properties['AuthToken']}\"")
     }
 
     buildTypes {
