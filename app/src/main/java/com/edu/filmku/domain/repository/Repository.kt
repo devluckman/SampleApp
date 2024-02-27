@@ -1,6 +1,7 @@
 package com.edu.filmku.domain.repository
 
 import com.edu.filmku.data.network.Resource
+import com.edu.filmku.domain.model.ItemMovieModel
 import com.edu.filmku.domain.request.RequestLogin
 import com.edu.filmku.domain.request.RequestRegister
 import kotlinx.coroutines.flow.Flow
@@ -20,4 +21,6 @@ interface Repository {
     fun registerWithEmailPassword(request: RequestRegister, callback: (Resource<Unit>) -> Unit)
 
     fun logout()
+
+    fun getNowPlayingMovie() : Flow<List<ItemMovieModel>>
 }

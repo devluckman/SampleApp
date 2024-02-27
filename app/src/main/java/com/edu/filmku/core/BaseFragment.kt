@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -31,6 +32,21 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewReady()
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                onBackPressEvent()
+            }
+        })
+    }
+
+    private fun onBackPressEvent() {
+        activity?.apply {
+            if (this is BaseActivity<*>) {
+                onBackPressEvent()
+            }else {
+                finish()
+            }
+        }
     }
 
     abstract fun onViewReady()

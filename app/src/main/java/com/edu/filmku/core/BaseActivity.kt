@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.os.Message
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -28,6 +32,15 @@ abstract class BaseActivity<VB : ViewBinding>(
         setContentView(binding.root)
         loadingDialog = DialogBuilder.loading(this)
         onViewReady()
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onBackPressEvent()
+            }
+        })
+    }
+
+    open fun onBackPressEvent() {
+        finish()
     }
 
     abstract fun onViewReady()
@@ -44,4 +57,10 @@ abstract class BaseActivity<VB : ViewBinding>(
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
+    fun inflateFragment(container: Int, fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(container, fragment)
+        transaction.addToBackStack(null) // Menambahkan fragment ke back stack
+        transaction.commit()
+    }
 }

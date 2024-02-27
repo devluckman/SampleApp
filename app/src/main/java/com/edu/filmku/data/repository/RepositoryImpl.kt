@@ -1,6 +1,9 @@
 package com.edu.filmku.data.repository
 
+import com.edu.filmku.data.mapper.MapperNowPlaying
 import com.edu.filmku.data.network.Resource
+import com.edu.filmku.data.remote.ApiMovieDB
+import com.edu.filmku.domain.model.ItemMovieModel
 import com.edu.filmku.domain.model.UserModel
 import com.edu.filmku.domain.repository.Repository
 import com.edu.filmku.domain.request.RequestLogin
@@ -18,7 +21,8 @@ import kotlinx.coroutines.flow.flow
  * devs.lukman@gmail.com
  */
 class RepositoryImpl(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val apiMovieDB: ApiMovieDB
 ) : Repository {
     override val isLogged: Flow<Boolean>
         get() = flow {
@@ -62,5 +66,16 @@ class RepositoryImpl(
 
     override fun logout() {
         firebaseAuth.signOut()
+    }
+
+    override fun getNowPlayingMovie(): Flow<List<ItemMovieModel>> = flow {
+        try {
+            // TODO jangan tambahkan token dulu dan okhttp
+            val token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDIzZjcwYzY5ZDlmNmI3MWZjMGRhYmUxZTI4YzZjYyIsInN1YiI6IjU5YTI0OTVhYzNhMzY4NDdkNDAzNWE0NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G8seJ8lH-19-KvtOz2pnbV2E3UcSQXwUoXYX9LQr0AQ"
+            val data = apiMovieDB.getNowPlaying(token = token)
+            emit(MapperNowPlaying.toDomain(data))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
