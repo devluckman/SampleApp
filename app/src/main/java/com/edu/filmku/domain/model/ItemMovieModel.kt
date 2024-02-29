@@ -9,4 +9,5 @@ data class ItemMovieModel (
     val title : String,
     val poster: String,
     val rating: String,
+    val id : String
 )

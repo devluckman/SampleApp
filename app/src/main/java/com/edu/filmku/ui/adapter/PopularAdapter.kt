@@ -12,19 +12,24 @@ import com.edu.filmku.domain.model.ItemMovieModel
  * Created by Lukmanul Hakim on  27/02/24
  * devs.lukman@gmail.com
  */
-class PopularAdapter : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+class PopularAdapter(
+    private val onClickAction :(ItemMovieModel) -> Unit
+) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     private val dataList = mutableListOf<ItemMovieModel>()
 
     class ViewHolder(private val binding: ItemMovieVerticalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: ItemMovieModel) {
+        fun bind(data: ItemMovieModel, onClickAction :(ItemMovieModel) -> Unit) {
             binding.apply {
                 tvRating.text = data.rating
                 tvMovieName.text = data.title
                 Glide.with(ivPoster)
                     .load(data.poster)
                     .into(ivPoster)
+                root.setOnClickListener {
+                    onClickAction.invoke(data)
+                }
             }
         }
     }
@@ -40,7 +45,7 @@ class PopularAdapter : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
-        holder.bind(data)
+        holder.bind(data, onClickAction)
     }
 
     fun submit(data : List<ItemMovieModel>) {

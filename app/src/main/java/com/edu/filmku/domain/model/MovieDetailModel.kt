@@ -8,18 +8,10 @@ package com.edu.filmku.domain.model
 data class MovieDetailModel(
     val title: String,
     val poster: String,
-    val imdb: String,
     val rating: String,
     val duration: String,
     val genre: List<String>,
-    val language: String,
     val description: String,
-    val cast: List<CastData>
-) {
-    data class CastData(
-        val picture: String,
-        val name: String
-    )
-}
+)
 
 

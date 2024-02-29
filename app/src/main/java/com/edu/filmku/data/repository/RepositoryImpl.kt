@@ -5,7 +5,9 @@ import com.edu.filmku.data.mapper.Mapper
 import com.edu.filmku.data.network.Resource
 import com.edu.filmku.data.remote.ApiMovieDB
 import com.edu.filmku.domain.local.Preferences
+import com.edu.filmku.domain.model.CastMovieData
 import com.edu.filmku.domain.model.ItemMovieModel
+import com.edu.filmku.domain.model.MovieDetailModel
 import com.edu.filmku.domain.model.UserModel
 import com.edu.filmku.domain.repository.Repository
 import com.edu.filmku.domain.request.RequestLogin
@@ -87,6 +89,30 @@ class RepositoryImpl(
         try {
             val data = apiMovieDB.getPopular(token = "Bearer ${preferences.token}")
             emit(Mapper.popularToDomain(data))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun getDetailMovie(idMovie: String): Flow<MovieDetailModel> = flow {
+        try {
+            val data = apiMovieDB.getDetailMovie(
+                token = "Bearer ${preferences.token}",
+                id = idMovie
+            )
+            emit(Mapper.detailToDomain(data))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun getCast(idMovie: String): Flow<List<CastMovieData>> = flow {
+        try {
+            val data = apiMovieDB.getCastMovie(
+                token = "Bearer ${preferences.token}",
+                id = idMovie
+            )
+            emit(Mapper.castToDomain(data))
         } catch (e: Exception) {
             e.printStackTrace()
         }
