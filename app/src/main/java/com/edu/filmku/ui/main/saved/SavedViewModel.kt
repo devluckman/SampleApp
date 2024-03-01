@@ -22,7 +22,7 @@ class SavedViewModel @Inject constructor(
 
     private val _favoriteData = MutableLiveData<List<DetailMovieModel>>()
     val favoriteData = _favoriteData
-    private fun getAllMovieFavorite() {
+    fun getAllMovieFavorite() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllMovieFavorite().collect {
                 _favoriteData.postValue(it)

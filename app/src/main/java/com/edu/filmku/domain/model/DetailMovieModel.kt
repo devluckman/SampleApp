@@ -14,6 +14,7 @@ data class DetailMovieModel(
     val id: Int,
     val title: String,
     val poster: String,
+    val backdrop: String,
     val rating: String,
     val duration: String,
     val genre: String,

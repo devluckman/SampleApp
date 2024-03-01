@@ -58,7 +58,7 @@ object DataModule {
             context,
             MovieDatabase::class.java,
             "my_cinema_db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides

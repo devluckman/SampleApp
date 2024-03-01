@@ -30,7 +30,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
                 tvDuration.text = data.duration
                 tvDescription.text = data.description
                 Glide.with(ivPoster)
-                    .load(data.poster)
+                    .load(data.backdrop)
                     .into(ivPoster)
                 val genres = data.genre.split(",")
                 genreAdapter.submit(genres)

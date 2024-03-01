@@ -32,11 +32,11 @@ abstract class BaseActivity<VB : ViewBinding>(
         setContentView(binding.root)
         loadingDialog = DialogBuilder.loading(this)
         onViewReady()
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                onBackPressEvent()
-            }
-        })
+//        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                onBackPressEvent()
+//            }
+//        })
     }
 
     open fun onBackPressEvent() {

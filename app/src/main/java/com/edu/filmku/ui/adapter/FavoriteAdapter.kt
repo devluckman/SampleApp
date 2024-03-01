@@ -51,6 +51,6 @@ class FavoriteAdapter(
     fun submit(data : List<DetailMovieModel>) {
         dataList.clear()
         dataList.addAll(data)
-        notifyItemChanged(0, dataList.size)
+        notifyDataSetChanged()
     }
 }

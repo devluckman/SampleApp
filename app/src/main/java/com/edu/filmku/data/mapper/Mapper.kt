@@ -47,7 +47,8 @@ object Mapper {
             description = data.overview.orEmpty(),
             genre = data.genres?.map { it.name.orEmpty() }?.joinToString(",") ?: "",
             rating = String.format("%.1f/10", data.voteAverage),
-            poster = BuildConfig.BASE_URL_IMAGE + data.backdropPath,
+            poster = BuildConfig.BASE_URL_IMAGE + data.posterPath,
+            backdrop = BuildConfig.BASE_URL_IMAGE + data.backdropPath,
             duration = minutesToHourMinute(data.runtime ?: 0)
         )
     }

@@ -1,5 +1,6 @@
 package com.edu.filmku.data.repository
 
+import android.util.Log
 import com.edu.filmku.BuildConfig
 import com.edu.filmku.data.database.dao.MovieDao
 import com.edu.filmku.data.mapper.Mapper
@@ -99,6 +100,7 @@ class RepositoryImpl(
     override fun getDetailMovie(idMovie: Int): Flow<DetailMovieModel> = flow {
         try {
             val movieData = database.findMovie(idMovie)
+            Log.d("WKWKWK", "Movie $movieData")
             if (movieData != null) {
                 emit(movieData)
             } else {
@@ -138,7 +140,7 @@ class RepositoryImpl(
             emit(false)
         } else {
             val newData = data.copy(isFavorite = true) // Flag
-            database.addMovieToBookmark(data)
+            database.addMovieToBookmark(newData)
             emit(true)
         }
     }
