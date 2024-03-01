@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.filmku.domain.model.CastMovieData
-import com.edu.filmku.domain.model.ItemMovieModel
-import com.edu.filmku.domain.model.MovieDetailModel
+import com.edu.filmku.domain.model.DetailMovieModel
 import com.edu.filmku.domain.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +21,11 @@ class DetailVM @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _detailDataMovie = MutableLiveData<MovieDetailModel>()
+    private val _detailDataMovie = MutableLiveData<DetailMovieModel>()
     val detailDataMovie = _detailDataMovie
-    fun getDetailMovie(id : String?) {
+    fun getDetailMovie(id : Int) {
         viewModelScope.launch {
-            repository.getDetailMovie(id.orEmpty()).collect {
+            repository.getDetailMovie(id).collect {
                 _detailDataMovie.value = it
             }
         }
@@ -33,10 +33,20 @@ class DetailVM @Inject constructor(
 
     private val _castMovieData = MutableLiveData<List<CastMovieData>>()
     val castMovieData = _castMovieData
-    fun getCastMovie(id : String?) {
+    fun getCastMovie(id : Int) {
         viewModelScope.launch {
-            repository.getCast(id.orEmpty()).collect {
+            repository.getCast(id).collect {
                 _castMovieData.value = it
+            }
+        }
+    }
+
+    private val _favoriteState = MutableLiveData<Boolean>()
+    val favoriteState = _favoriteState
+    fun updateDataFavorite(data: DetailMovieModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateOrDeleteMovieInFavorite(data).collect {
+                _favoriteState.postValue(it)
             }
         }
     }

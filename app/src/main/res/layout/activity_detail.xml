@@ -32,14 +32,30 @@
         android:orientation="vertical"
         android:paddingTop="16dp">
 
-        <TextView
-            android:id="@+id/tv_movie_name"
-            style="@style/Gabarito.SemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:textSize="20sp"
-            tools:text="Spiderman: No Way Home" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_movie_name"
+                style="@style/Gabarito.SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                tools:text="Spiderman: No Way Home" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_bookmark"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_bookmark_off" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:id="@+id/tv_imbd"
@@ -107,10 +123,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:clipToPadding="false"
             android:paddingEnd="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_cast" />

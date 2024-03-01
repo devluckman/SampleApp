@@ -1,13 +1,14 @@
 package com.edu.filmku.data.repository
 
 import com.edu.filmku.BuildConfig
+import com.edu.filmku.data.database.dao.MovieDao
 import com.edu.filmku.data.mapper.Mapper
 import com.edu.filmku.data.network.Resource
 import com.edu.filmku.data.remote.ApiMovieDB
 import com.edu.filmku.domain.local.Preferences
 import com.edu.filmku.domain.model.CastMovieData
 import com.edu.filmku.domain.model.ItemMovieModel
-import com.edu.filmku.domain.model.MovieDetailModel
+import com.edu.filmku.domain.model.DetailMovieModel
 import com.edu.filmku.domain.model.UserModel
 import com.edu.filmku.domain.repository.Repository
 import com.edu.filmku.domain.request.RequestLogin
@@ -27,7 +28,8 @@ import kotlinx.coroutines.flow.flow
 class RepositoryImpl(
     private val firebaseAuth: FirebaseAuth,
     private val apiMovieDB: ApiMovieDB,
-    private val preferences: Preferences
+    private val preferences: Preferences,
+    private val database: MovieDao
 ) : Repository {
     override val isLogged: Flow<Boolean>
         get() = flow {
@@ -94,19 +96,24 @@ class RepositoryImpl(
         }
     }
 
-    override fun getDetailMovie(idMovie: String): Flow<MovieDetailModel> = flow {
+    override fun getDetailMovie(idMovie: Int): Flow<DetailMovieModel> = flow {
         try {
-            val data = apiMovieDB.getDetailMovie(
-                token = "Bearer ${preferences.token}",
-                id = idMovie
-            )
-            emit(Mapper.detailToDomain(data))
+            val movieData = database.findMovie(idMovie)
+            if (movieData != null) {
+                emit(movieData)
+            } else {
+                val data = apiMovieDB.getDetailMovie(
+                    token = "Bearer ${preferences.token}",
+                    id = idMovie
+                )
+                emit(Mapper.detailToDomain(data))
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    override fun getCast(idMovie: String): Flow<List<CastMovieData>> = flow {
+    override fun getCast(idMovie: Int): Flow<List<CastMovieData>> = flow {
         try {
             val data = apiMovieDB.getCastMovie(
                 token = "Bearer ${preferences.token}",
@@ -115,6 +122,24 @@ class RepositoryImpl(
             emit(Mapper.castToDomain(data))
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    override fun getAllMovieFavorite(): Flow<List<DetailMovieModel>> = flow {
+        val data = database.getAllMovieBookmark()
+        emit(data)
+    }
+
+    override fun updateOrDeleteMovieInFavorite(data: DetailMovieModel): Flow<Boolean> = flow {
+        val movieData = database.findMovie(data.id)
+        val dataReadyInDatabase = movieData != null
+        if (dataReadyInDatabase) {
+            database.deleteMovieFromBookmark(data)
+            emit(false)
+        } else {
+            val newData = data.copy(isFavorite = true) // Flag
+            database.addMovieToBookmark(data)
+            emit(true)
         }
     }
 }

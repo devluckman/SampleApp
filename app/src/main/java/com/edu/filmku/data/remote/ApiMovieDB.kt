@@ -28,13 +28,13 @@ interface ApiMovieDB {
     @GET("3/movie/{id}")
     suspend fun getDetailMovie(
         @Header("Authorization") token: String,
-        @Path("id") id: String
+        @Path("id") id: Int
     ): DetailMovieResponse
 
     @GET("3/movie/{id}/credits")
     suspend fun getCastMovie(
         @Header("Authorization") token: String,
-        @Path("id") id: String
+        @Path("id") id: Int
     ): CastResponse
 
 

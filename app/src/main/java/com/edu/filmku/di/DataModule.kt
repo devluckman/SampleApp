@@ -1,6 +1,8 @@
 package com.edu.filmku.di
 
 import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.edu.filmku.BuildConfig
 import com.edu.filmku.data.local.PreferencesHelper
 import com.edu.filmku.data.local.PreferencesImpl
@@ -17,7 +19,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import com.edu.filmku.data.database.MovieDatabase
+import com.edu.filmku.data.database.dao.MovieDao
 
 /**
  *
@@ -28,6 +31,7 @@ import retrofit2.create
 @InstallIn(SingletonComponent::class)
 object DataModule {
 
+    // region Preferences
     @Provides
     fun providePreferenceHelper(
         @ApplicationContext context: Context
@@ -42,10 +46,38 @@ object DataModule {
         return PreferencesImpl(helper)
     }
 
+    // endregion
+
+    // region Database
+
+    @Provides
+    fun provideRoomDatabase(
+        @ApplicationContext context: Context
+    ): MovieDatabase {
+        return Room.databaseBuilder(
+            context,
+            MovieDatabase::class.java,
+            "my_cinema_db"
+        ).build()
+    }
+
+    @Provides
+    fun provideDaoMovie(movieDatabase: MovieDatabase) : MovieDao {
+        return movieDatabase.movieDao()
+    }
+
+    // endregion
+
+    // region Firebase
+
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
+
+    // endregion
+
+    // region API
 
     @Provides
     fun provideApi(): ApiMovieDB {
@@ -60,12 +92,16 @@ object DataModule {
     fun provideRepository(
         firebaseAuth: FirebaseAuth,
         apiMovieDB: ApiMovieDB,
-        preferences: Preferences
+        preferences: Preferences,
+        movieDao: MovieDao
     ): Repository {
         return RepositoryImpl(
             firebaseAuth = firebaseAuth,
             apiMovieDB = apiMovieDB,
-            preferences = preferences
+            preferences = preferences,
+            database = movieDao
         )
     }
+
+    // endregion
 }

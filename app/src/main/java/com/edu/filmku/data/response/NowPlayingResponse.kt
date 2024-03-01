@@ -64,7 +64,7 @@ data class NowPlayingResponse(
 		val voteAverage: Double? = null,
 
 		@SerializedName("id")
-		val id: Int? = null,
+		val id: Int,
 
 		@SerializedName("adult")
 		val adult: Boolean? = null,

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.edu.filmku.R
 import com.edu.filmku.core.BaseActivity
 import com.edu.filmku.databinding.ActivityDetailBinding
 import com.edu.filmku.ui.adapter.CastAdapter
@@ -22,16 +23,24 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
     override fun onViewReady() {
         binding.rvCastMovie.adapter = castAdapter
         binding.rvGenres.adapter = genreAdapter
-        viewModel.detailDataMovie.observe(this) {
+        viewModel.detailDataMovie.observe(this) { data ->
             binding.apply {
-                tvMovieName.text = it.title
-                tvImbd.text = it.rating
-                tvDuration.text = it.duration
-                tvDescription.text = it.description
+                tvMovieName.text = data.title
+                tvImbd.text = data.rating
+                tvDuration.text = data.duration
+                tvDescription.text = data.description
                 Glide.with(ivPoster)
-                    .load(it.poster)
+                    .load(data.poster)
                     .into(ivPoster)
-                genreAdapter.submit(it.genre)
+                val genres = data.genre.split(",")
+                genreAdapter.submit(genres)
+                val iconFavorite = if (data.isFavorite)
+                    R.drawable.ic_bookmark_on
+                else R.drawable.ic_bookmark_off
+                btnBookmark.setImageResource(iconFavorite)
+                btnBookmark.setOnClickListener {
+                    viewModel.updateDataFavorite(data)
+                }
             }
         }
 
@@ -39,7 +48,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
             castAdapter.submit(it)
         }
 
-        val id = intent.getStringExtra(KEY_ID_MOVIE)
+        viewModel.favoriteState.observe(this) { data ->
+            val iconFavorite = if (data)
+                R.drawable.ic_bookmark_on
+            else R.drawable.ic_bookmark_off
+            binding.btnBookmark.setImageResource(iconFavorite)
+        }
+
+        val id = intent.getIntExtra(KEY_ID_MOVIE, 0)
         viewModel.getDetailMovie(id)
         viewModel.getCastMovie(id)
     }
@@ -47,7 +63,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(
 
     companion object {
         const val KEY_ID_MOVIE = "KEY_ID_MOVIE"
-        fun newInstance(context: Context?, id: String) {
+        fun newInstance(context: Context?, id: Int) {
             context?.let {
                 val intent = Intent(it, DetailActivity::class.java)
                 intent.putExtra(KEY_ID_MOVIE, id)

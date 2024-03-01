@@ -52,7 +52,7 @@ data class PopularResponse(
         val voteAverage: Any? = null,
 
         @field:SerializedName("id")
-        val id: Int? = null,
+        val id: Int,
 
         @field:SerializedName("adult")
         val adult: Boolean? = null,

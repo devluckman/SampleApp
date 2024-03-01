@@ -7,7 +7,8 @@ import com.edu.filmku.data.response.NowPlayingResponse
 import com.edu.filmku.data.response.PopularResponse
 import com.edu.filmku.domain.model.CastMovieData
 import com.edu.filmku.domain.model.ItemMovieModel
-import com.edu.filmku.domain.model.MovieDetailModel
+import com.edu.filmku.domain.model.DetailMovieModel
+import kotlin.random.Random
 
 /**
  *
@@ -16,33 +17,35 @@ import com.edu.filmku.domain.model.MovieDetailModel
  */
 object Mapper {
 
-    fun nowPlayingToDomain(data : NowPlayingResponse) : List<ItemMovieModel> {
+    fun nowPlayingToDomain(data: NowPlayingResponse): List<ItemMovieModel> {
         return data.results?.map {
             ItemMovieModel(
                 title = it.originalTitle.orEmpty(),
                 rating = String.format("%.1f/10", it.voteAverage),
                 poster = BuildConfig.BASE_URL_IMAGE + it.posterPath,
-                id = "${it.id}"
+                id = it.id
             )
         } ?: emptyList()
     }
 
-    fun popularToDomain(data : PopularResponse) : List<ItemMovieModel> {
+    fun popularToDomain(data: PopularResponse): List<ItemMovieModel> {
         return data.results?.map {
             ItemMovieModel(
                 title = it.originalTitle.orEmpty(),
                 rating = String.format("%.1f/10", it.voteAverage),
                 poster = BuildConfig.BASE_URL_IMAGE + it.posterPath,
-                id = "${it.id}"
+                id = it.id
             )
         } ?: emptyList()
     }
 
-    fun detailToDomain(data : DetailMovieResponse) : MovieDetailModel {
-        return MovieDetailModel(
+    fun detailToDomain(data: DetailMovieResponse): DetailMovieModel {
+
+        return DetailMovieModel(
+            id = data.id,
             title = data.originalTitle.orEmpty(),
             description = data.overview.orEmpty(),
-            genre = data.genres?.map { it.name.orEmpty() } ?: emptyList(),
+            genre = data.genres?.map { it.name.orEmpty() }?.joinToString(",") ?: "",
             rating = String.format("%.1f/10", data.voteAverage),
             poster = BuildConfig.BASE_URL_IMAGE + data.backdropPath,
             duration = minutesToHourMinute(data.runtime ?: 0)
@@ -59,7 +62,7 @@ object Mapper {
         return "$hoursStr$minutesStr"
     }
 
-    fun castToDomain(data : CastResponse) : List<CastMovieData> {
+    fun castToDomain(data: CastResponse): List<CastMovieData> {
         return data.cast?.map {
             CastMovieData(
                 name = it.name.orEmpty(),

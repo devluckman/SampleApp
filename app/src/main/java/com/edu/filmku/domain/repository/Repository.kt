@@ -3,7 +3,7 @@ package com.edu.filmku.domain.repository
 import com.edu.filmku.data.network.Resource
 import com.edu.filmku.domain.model.CastMovieData
 import com.edu.filmku.domain.model.ItemMovieModel
-import com.edu.filmku.domain.model.MovieDetailModel
+import com.edu.filmku.domain.model.DetailMovieModel
 import com.edu.filmku.domain.request.RequestLogin
 import com.edu.filmku.domain.request.RequestRegister
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +27,10 @@ interface Repository {
     fun getNowPlayingMovie() : Flow<List<ItemMovieModel>>
     fun getPopularMovie() : Flow<List<ItemMovieModel>>
 
-    fun getDetailMovie(idMovie : String) : Flow<MovieDetailModel>
-    fun getCast(idMovie : String) : Flow<List<CastMovieData>>
+    fun getDetailMovie(idMovie : Int) : Flow<DetailMovieModel>
+    fun getCast(idMovie : Int) : Flow<List<CastMovieData>>
+
+    fun getAllMovieFavorite() : Flow<List<DetailMovieModel>>
+
+    fun updateOrDeleteMovieInFavorite(data : DetailMovieModel) : Flow<Boolean>
 }
