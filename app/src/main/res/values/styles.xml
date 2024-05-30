@@ -21,6 +21,10 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="Gabarito.Regular.Red" parent="">
+        <item name="android:textColor">@color/error_red</item>
+    </style>
+
     <style name="Gabarito.SemiBold" parent="">
         <item name="android:fontFamily">@font/gabarito_semibold</item>
         <item name="android:textColor">@color/black</item>

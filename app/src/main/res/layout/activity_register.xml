@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
-    tools:context=".ui.register.RegisterActivity">
+    tools:context=".presentation.register.RegisterActivity">
 
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp">
 
-        <com.edu.filmku.widget.CustomEditText
+        <com.edu.filmku.core.widget.CustomEditText
             android:id="@+id/edt_first_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_width="16dp"
             android:layout_height="8dp" />
 
-        <com.edu.filmku.widget.CustomEditText
+        <com.edu.filmku.core.widget.CustomEditText
             android:id="@+id/edt_last_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.edu.filmku.widget.CustomEditText
+    <com.edu.filmku.core.widget.CustomEditText
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         app:input_type="email"
         app:title="Email" />
 
-    <com.edu.filmku.widget.CustomEditText
+    <com.edu.filmku.core.widget.CustomEditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         android:textColor="@color/neutral_n500"
         android:textSize="14sp" />
 
-    <com.edu.filmku.widget.CustomEditText
+    <com.edu.filmku.core.widget.CustomEditText
         android:id="@+id/edt_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
