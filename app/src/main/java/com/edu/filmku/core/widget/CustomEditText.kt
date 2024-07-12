@@ -2,16 +2,17 @@ package com.edu.filmku.core.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
 import com.edu.filmku.R
 import com.edu.filmku.R.styleable.TextInputCustom
 import com.edu.filmku.R.styleable.TextInputCustom_hint_text
 import com.edu.filmku.R.styleable.TextInputCustom_input_type
 import com.edu.filmku.R.styleable.TextInputCustom_title
-import com.edu.filmku.core.base.findIdByLazy
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -59,5 +60,9 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
 
     fun setError(message : String) {
         textInputLayout.error = message
+    }
+
+    private fun <T : View> View.findIdByLazy(@IdRes id: Int): Lazy<T> {
+        return lazy { findViewById(id) }
     }
 }
